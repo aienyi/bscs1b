@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Portfolio</title>
+    <title>ID Layout</title>
     <style>
         body {
-        
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;  /* center horizontally */
+            align-items: center;      /* center vertically */
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
         }
 
         .container {
-            width: 1800px;
-            height: 12000px;
-            border: 3px solid black;
+            width: 400px;
             padding: 20px;
-            display: flex;
-            font-family: Arial, sans-serif;
+            border: 3px solid black;
             background-color: rgb(194, 105, 146);
-            justify-content: center;   /* Center horizontally */
-            text-align: center;       /* Center text */
+            text-align: center;  /* centers text */
             border-radius: 15px;
         }
 
         .photo {
-            width: 300px;
-            height: 300px;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px auto;  /* center image */
             border: 2px solid black;
-            margin-bottom: 20px;
-            
         }
 
         .photo img {
@@ -35,13 +36,13 @@
         }
 
         .info {
-            width: 500px;
+            width: 100%;
         }
 
         .info p {
             border-bottom: 1px solid black;
-            padding: 5px 0;
-            margin: 20px 0;
+            padding: 8px 0;
+            margin: 8px 0;
         }
     </style>
 </head>
@@ -65,7 +66,6 @@
 
 </body>
 </html>
-
 
 
 
