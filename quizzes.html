@@ -68,13 +68,79 @@ body {
     <a href="exams.html">Exams</a>
 </div>
 
-<!-- TITLE -->
 <div class="page-title">My Quizzes</div>
 
-<!-- CONTENT -->
 <div class="content">
 <p>This is where my quizzes will appear.</p>
+
+<br><br>
+
+<div id="quizContainer" style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+    
+    <label style="
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        width:80px;
+        height:80px;
+        border:2px dashed black;
+        border-radius:15px;
+        font-size:40px;
+        cursor:pointer;
+        background-color:#ffe4ec;
+    ">
+        +
+        <input type="file" accept="image/*" style="display:none;" onchange="addImage(event)">
+    </label>
+
 </div>
+
+</div>
+
+<script>
+let images = JSON.parse(localStorage.getItem("quizImages")) || [];
+
+function saveImages() {
+    localStorage.setItem("quizImages", JSON.stringify(images));
+}
+
+function displayImages() {
+    const container = document.getElementById("quizContainer");
+
+   
+    const labels = container.querySelectorAll("label");
+    container.innerHTML = "";
+    labels.forEach(label => container.appendChild(label));
+
+    images.forEach(src => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.style.width = "300px";
+        img.style.borderRadius = "15px";
+        img.style.border = "2px solid black";
+
+        container.insertBefore(img, container.firstChild);
+    });
+}
+
+function addImage(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        images.push(e.target.result);
+        saveImages();
+        displayImages();
+    };
+
+    reader.readAsDataURL(file);
+}
+
+
+window.onload = displayImages;
+</script>
 
 </body>
 </html>
