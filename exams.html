@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Quizzes</title>
+<title>Exams</title>
 
 <style>
 
@@ -14,11 +14,13 @@ body {
     font-family: Arial, sans-serif;
 }
 
+
 .navbar {
     position: absolute;
     top: 30px;
     width: 100%;
     text-align: center;
+    background: none;
 }
 
 .navbar a {
@@ -31,7 +33,19 @@ body {
     font-size: 18px;
     border-radius: 50px;
     border: 2px solid black;
+    display: inline-block;
+    transition: all 0.25s ease;
 }
+
+
+.navbar a:hover {
+    transform: scale(1.05);
+    background-color: #ffc0cb;
+    box-shadow: 0 0 8px #ffc0cb;
+    border-color: #ffc0cb;
+}
+
+
 
 .page-title{
     position: absolute;
@@ -80,7 +94,6 @@ body {
     margin-top: 8px;
     font-weight: bold;
 }
-
 
 #modal {
     display: none;
@@ -135,7 +148,7 @@ body {
     <a href="exams.html">Exams</a>
 </div>
 
-<div class="page-title">My Quizzes</div>
+<div class="page-title">My Exams</div>
 
 <div class="content">
 
@@ -143,17 +156,17 @@ body {
 
     <div class="card">
         <img src="https://via.placeholder.com/300x200" onclick="openImg(this.src)">
-        <div class="caption">Quiz 1</div>
+        <div class="caption">Exam 1</div>
     </div>
 
     <div class="card">
         <img src="https://via.placeholder.com/300x200" onclick="openImg(this.src)">
-        <div class="caption">Quiz 2</div>
+        <div class="caption">Exam 2</div>
     </div>
     
-     <div class="card">
+    <div class="card">
         <img src="https://via.placeholder.com/300x200" onclick="openImg(this.src)">
-        <div class="caption">Quiz 3</div>
+        <div class="caption">Exam 3</div>
     </div>
 
 </div>
