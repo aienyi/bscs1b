@@ -36,10 +36,6 @@ body {
     border: 2px solid black;
 }
 
-.navbar a:hover {
-    background-color: #ff9eb5;
-}
-
 .page-title{
     position: absolute;
     top: 110px;
@@ -53,8 +49,23 @@ body {
     position: absolute;
     top: 160px;
     width: 100%;
+    width: 100%;
     text-align: center;
-    font-size: 18px;
+}
+
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.gallery img {
+    width: 300px;
+    border-radius: 15px;
+    border: 2px solid black;
 }
 
 </style>
@@ -65,13 +76,23 @@ body {
 <div class="navbar">
     <a href="index.html">Home</a>
     <a href="activities.html">Activities</a>
-    <a href="quizzes.html">Quizzes</a>
+    <a href="exams.html">Exams</a>
 </div>
 
 <div class="page-title">My Exams</div>
 
 <div class="content">
-<p>This is where my exams will appear.</p>
+
+
+<div class="gallery">
+
+   
+    <img src="https://via.placeholder.com/300x200" alt="Exam 1">
+    <img src="https://via.placeholder.com/300x200" alt="Exam 2">
+    <img src="https://via.placeholder.com/300x200" alt="Exam 3">
+
+</div>
+
 </div>
 
 </body>
