@@ -14,11 +14,13 @@ body {
     font-family: Arial, sans-serif;
 }
 
+
 .navbar {
     position: absolute;
     top: 30px;
     width: 100%;
     text-align: center;
+    background: none;
 }
 
 .navbar a {
@@ -31,7 +33,18 @@ body {
     font-size: 18px;
     border-radius: 50px;
     border: 2px solid black;
+    display: inline-block;
+    transition: all 0.25s ease;
 }
+
+.navbar a:hover {
+    transform: scale(1.05);
+    background-color: #ffc0cb;
+    box-shadow: 0 0 8px #ffc0cb;
+    border-color: #ffc0cb;
+}
+
+
 
 .page-title{
     position: absolute;
@@ -102,7 +115,6 @@ body {
     border: 3px solid #ffb6c1;
     box-shadow: 0 0 15px #ffc0cb;
 }
-
 
 .closeBtn {
     position: absolute;
