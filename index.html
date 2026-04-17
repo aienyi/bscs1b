@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>My Portfolio</title>
+
     <style>
         body {
             margin: 0;
@@ -18,33 +19,39 @@
             font-family: Arial, sans-serif;
         }
 
-        
+       
         .navbar {
             position: absolute;
             top: 30px;
             width: 100%;
             text-align: center;
-            background: none; 
+            background: none;
         }
 
         .navbar a {
             text-decoration: none;
-            background-color: #FFB6C1; 
+            background-color: #FFB6C1;
             color: black;
             font-weight: bold;
             padding: 12px 35px;
             margin: 0 15px;
             font-size: 18px;
-            border-radius: 50px; 
+            border-radius: 50px;
             border: 2px solid black;
             display: inline-block;
+
+            transition: all 0.25s ease;
         }
 
+       
         .navbar a:hover {
-            background-color: #ff9eb5;
+            transform: scale(1.05);
+            background-color: #ffc0cb;
+            box-shadow: 0 0 8px #ffc0cb;
+            border-color: #ffc0cb;
         }
-        
 
+     
 
         .container {
             width: 400px;
@@ -81,6 +88,7 @@
         }
     </style>
 </head>
+
 <body>
 
 <div class="navbar">
@@ -107,4 +115,3 @@
 
 </body>
 </html>
-
