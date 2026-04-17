@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Exams</title>
+<title>Quizzes</title>
 
 <style>
 
 body {
     margin: 0;
     height: 100vh;
-
     background-image: url("https://uploads.onecompiler.io/44e286jwz/44fh2kq8u/download%20(14).jpg");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-
     font-family: Arial, sans-serif;
 }
 
@@ -49,23 +46,82 @@ body {
     position: absolute;
     top: 160px;
     width: 100%;
-    width: 100%;
     text-align: center;
 }
-
 
 .gallery {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 25px;
     padding-top: 20px;
 }
 
-.gallery img {
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card img {
     width: 300px;
     border-radius: 15px;
     border: 2px solid black;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px #ffc0cb;
+}
+
+.caption {
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+
+#modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,192,203,0.35);
+    justify-content: center;
+    align-items: center;
+}
+
+#modal img {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 15px;
+    border: 3px solid #ffb6c1;
+    box-shadow: 0 0 15px #ffc0cb;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    font-size: 35px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    background: #ffb6c1;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+}
+
+.closeBtn:hover {
+    background: #ff9eb5;
 }
 
 </style>
@@ -79,21 +135,47 @@ body {
     <a href="exams.html">Exams</a>
 </div>
 
-<div class="page-title">My Exams</div>
+<div class="page-title">My Quizzes</div>
 
 <div class="content">
 
-
 <div class="gallery">
 
-   
-    <img src="https://via.placeholder.com/300x200" alt="Exam 1">
-    <img src="https://via.placeholder.com/300x200" alt="Exam 2">
-    <img src="https://via.placeholder.com/300x200" alt="Exam 3">
+    <div class="card">
+        <img src="https://via.placeholder.com/300x200" onclick="openImg(this.src)">
+        <div class="caption">Quiz 1</div>
+    </div>
+
+    <div class="card">
+        <img src="https://via.placeholder.com/300x200" onclick="openImg(this.src)">
+        <div class="caption">Quiz 2</div>
+    </div>
+    
+     <div class="card">
+        <img src="https://via.placeholder.com/300x200" onclick="openImg(this.src)">
+        <div class="caption">Quiz 3</div>
+    </div>
 
 </div>
 
 </div>
+
+<div id="modal" onclick="closeImg()">
+    <div class="closeBtn" onclick="closeImg(event)">×</div>
+    <img id="modalImg">
+</div>
+
+<script>
+function openImg(src){
+    document.getElementById("modalImg").src = src;
+    document.getElementById("modal").style.display = "flex";
+}
+
+function closeImg(event){
+    if(event) event.stopPropagation();
+    document.getElementById("modal").style.display = "none";
+}
+</script>
 
 </body>
 </html>
