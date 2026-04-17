@@ -36,11 +36,6 @@ body {
     border: 2px solid black;
 }
 
-.navbar a:hover {
-    background-color: #ff9eb5;
-}
-
-
 .page-title{
     position: absolute;
     top: 110px;
@@ -50,13 +45,27 @@ body {
     font-weight: bold;
 }
 
-
 .content{
     position: absolute;
     top: 160px;
     width: 100%;
+    width: 100%;
     text-align: center;
-    font-size: 18px;
+}
+
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.gallery img {
+    width: 300px;
+    border-radius: 15px;
+    border: 2px solid black;
 }
 
 </style>
@@ -66,16 +75,26 @@ body {
 
 <div class="navbar">
     <a href="index.html">Home</a>
-    <a href="quizzes.html">Quizzes</a>
+    <a href="activities.html">Activities</a>
     <a href="exams.html">Exams</a>
 </div>
 
-
 <div class="page-title">My Activities</div>
 
-
 <div class="content">
-<p>This is where my activities will appear.</p>
+
+<p>Add your activity images below</p>
+
+
+<div class="gallery">
+
+
+    <img src="https://via.placeholder.com/300x200" alt="Activity 1">
+    <img src="https://via.placeholder.com/300x200" alt="Activity 2">
+    <img src="https://via.placeholder.com/300x200" alt="Activity 3">
+
+</div>
+
 </div>
 
 </body>
