@@ -76,9 +76,9 @@ body::before {
 
 .navbar a:hover, .uploadBtn:hover {
     transform: scale(1.1) rotate(-1deg);
+    background-color: #ffc0cb;
     box-shadow: 0 0 20px #ffb6c1;
 }
-
 
 .page-title{
     position: absolute;
@@ -90,8 +90,13 @@ body::before {
     color: white;
     text-shadow: 0 0 8px black;
     z-index: 10;
+    animation: fadeDown 1s ease;
 }
 
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 .content{
     position: absolute;
@@ -114,6 +119,16 @@ body::before {
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: floatCard 4s ease-in-out infinite;
+}
+
+.card:nth-child(2) { animation-delay: 0.5s; }
+.card:nth-child(3) { animation-delay: 1s; }
+
+@keyframes floatCard {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0); }
 }
 
 .card img {
@@ -127,8 +142,8 @@ body::before {
 
 .card img:hover {
     transform: scale(1.08);
-    box-shadow: 0 0 25px #ffc0cb;
 }
+
 
 .caption {
     margin-top: 8px;
@@ -155,6 +170,7 @@ body::before {
     cursor: pointer;
 }
 
+
 #modal {
     display: none;
     position: fixed;
@@ -171,6 +187,12 @@ body::before {
     max-height: 80%;
     border-radius: 15px;
     border: 3px solid #ffb6c1;
+    animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .closeBtn {
@@ -195,8 +217,8 @@ body::before {
 
 <body>
 
-
 <script>
+
 for(let i=0;i<40;i++){
     let s=document.createElement("div");
     s.className="sparkle";
@@ -224,7 +246,6 @@ for(let i=0;i<40;i++){
 <div class="gallery" id="gallery"></div>
 </div>
 
-
 <div id="modal" onclick="closeImg()">
     <div class="closeBtn" onclick="closeImg(event)">×</div>
     <img id="modalImg">
@@ -249,7 +270,7 @@ function render(){
         card.innerHTML = `
             <button class="deleteBtn" onclick="removeCard(${index})">×</button>
             <img src="${item.src}" onclick="openImg(this.src)">
-            <div class="caption" ondblclick="editCaption(${index})">
+            <div class="caption" onclick="editCaption(${index})">
                 ${item.caption}
             </div>
         `;
