@@ -8,19 +8,52 @@
 body {
     margin: 0;
     height: 100vh;
-    background-image: url("https://uploads.onecompiler.io/44e286jwz/44m6hu7js/Cat%20Pink%20Wallpaper.jpg");
+    background-image: url("https://uploads.onecompiler.io/44e286jwz/44m6hu7js/Animation%20Screencaps_com.jpg");
     background-size: cover;
     background-position: center;
     font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
+
+body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,192,203,0.3), transparent 60%);
+    animation: bgMove 12s linear infinite;
+}
+
+@keyframes bgMove {
+    0% { transform: translate(0,0); }
+    50% { transform: translate(-20%, -10%); }
+    100% { transform: translate(0,0); }
+}
+
+
+.sparkle {
+    position: fixed;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
 
 .navbar {
     position: absolute;
     top: 30px;
     width: 100%;
     text-align: center;
-    background: none;
+    z-index: 10;
 }
 
 .navbar a {
@@ -34,26 +67,31 @@ body {
     border-radius: 50px;
     border: 2px solid black;
     display: inline-block;
-    transition: all 0.25s ease;
+    transition: all 0.3s ease;
 }
-
 
 .navbar a:hover {
-    transform: scale(1.05);
+    transform: scale(1.1) rotate(-1deg);
     background-color: #ffc0cb;
-    box-shadow: 0 0 8px #ffc0cb;
-    border-color: #ffc0cb;
+    box-shadow: 0 0 20px #ffb6c1;
 }
-
-
 
 .page-title{
     position: absolute;
     top: 110px;
     width: 100%;
     text-align: center;
-    font-size: 26px;
+    font-size: 28px;
     font-weight: bold;
+    color: white;
+    text-shadow: 0 0 8px black;
+    z-index: 10;
+    animation: fadeDown 1s ease;
+}
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .content{
@@ -61,6 +99,7 @@ body {
     top: 160px;
     width: 100%;
     text-align: center;
+    z-index: 10;
 }
 
 .gallery {
@@ -68,13 +107,23 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     gap: 25px;
-    padding-top: 20px;
 }
+
 
 .card {
     display: flex;
     flex-direction: column;
     align-items: center;
+    animation: floatCard 4s ease-in-out infinite;
+}
+
+.card:nth-child(2) { animation-delay: 0.5s; }
+.card:nth-child(3) { animation-delay: 1s; }
+
+@keyframes floatCard {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0); }
 }
 
 .card img {
@@ -82,18 +131,25 @@ body {
     border-radius: 15px;
     border: 2px solid black;
     cursor: pointer;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 12px #ffc0cb;
+    transform: scale(1.08);
+    box-shadow: 0 0 25px #ffc0cb;
 }
 
 .caption {
     margin-top: 8px;
     font-weight: bold;
+    color: white;
+    text-shadow: 0 0 5px black;
+    background: rgba(0,0,0,0.4);
+    padding: 5px 12px;
+    border-radius: 10px;
 }
+
 
 #modal {
     display: none;
@@ -105,6 +161,7 @@ body {
     background: rgba(255,192,203,0.35);
     justify-content: center;
     align-items: center;
+    z-index: 20;
 }
 
 #modal img {
@@ -112,7 +169,13 @@ body {
     max-height: 80%;
     border-radius: 15px;
     border: 3px solid #ffb6c1;
-    box-shadow: 0 0 15px #ffc0cb;
+    box-shadow: 0 0 25px #ffc0cb;
+    animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .closeBtn {
@@ -131,16 +194,30 @@ body {
     justify-content: center;
     align-items: center;
     border: 2px solid black;
+    transition: 0.3s ease;
 }
 
 .closeBtn:hover {
     background: #ff9eb5;
+    transform: rotate(90deg);
 }
 
 </style>
-
 </head>
+
 <body>
+
+
+<script>
+for(let i=0;i<40;i++){
+    let s=document.createElement("div");
+    s.className="sparkle";
+    s.style.left=Math.random()*100+"vw";
+    s.style.animationDuration=(3+Math.random()*6)+"s";
+    s.style.animationDelay=Math.random()*5+"s";
+    document.body.appendChild(s);
+}
+</script>
 
 <div class="navbar">
     <a href="index.html">Home</a>
@@ -156,17 +233,17 @@ body {
 
     <div class="card">
         <img src="https://via.placeholder.com/300x200" onclick="openImg(this.src)">
-        <div class="caption" style="color: white; text-shadow: 0 0 5px black;">Exam 1</div>
+        <div class="caption">Exam 1</div>
     </div>
 
     <div class="card">
         <img src="https://via.placeholder.com/300x200" onclick="openImg(this.src)">
-        <div class="caption" style="color: white; text-shadow: 0 0 5px black;">Exam 2</div>
+        <div class="caption">Exam 2</div>
     </div>
     
     <div class="card">
         <img src="https://via.placeholder.com/300x200" onclick="openImg(this.src)">
-        <div class="caption" style="color: white; text-shadow: 0 0 5px black;">Exam 3</div>
+        <div class="caption">Exam 3</div>
     </div>
 
 </div>
