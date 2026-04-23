@@ -15,7 +15,6 @@ body {
     overflow: hidden;
 }
 
-
 body::before {
     content: "";
     position: fixed;
@@ -30,7 +29,6 @@ body::before {
     50% { transform: translate(-20%, -10%); }
     100% { transform: translate(0,0); }
 }
-
 
 .sparkle {
     position: fixed;
@@ -47,6 +45,7 @@ body::before {
     20% { opacity: 1; }
     100% { transform: translateY(-10vh); opacity: 0; }
 }
+
 
 .navbar {
     position: absolute;
@@ -75,6 +74,20 @@ body::before {
     background-color: #ffc0cb;
     box-shadow: 0 0 20px #ffb6c1;
 }
+
+
+.uploadBtn {
+    background-color: #FFB6C1;
+    color: black;
+    font-weight: bold;
+    padding: 12px 35px;
+    margin: 0 15px;
+    font-size: 18px;
+    border-radius: 50px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
 
 .page-title{
     position: absolute;
@@ -109,12 +122,12 @@ body::before {
     gap: 25px;
 }
 
-
 .card {
     display: flex;
     flex-direction: column;
     align-items: center;
     animation: floatCard 4s ease-in-out infinite;
+    position: relative;
 }
 
 .card:nth-child(2) { animation-delay: 0.5s; }
@@ -151,6 +164,20 @@ body::before {
 }
 
 
+.deleteBtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #FFB6C1;
+    border: 2px solid black;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
 #modal {
     display: none;
     position: fixed;
@@ -170,12 +197,6 @@ body::before {
     border-radius: 15px;
     border: 3px solid #ffb6c1;
     box-shadow: 0 0 25px #ffc0cb;
-    animation: pop 0.3s ease;
-}
-
-@keyframes pop {
-    from { transform: scale(0.6); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
 }
 
 .closeBtn {
@@ -194,19 +215,12 @@ body::before {
     justify-content: center;
     align-items: center;
     border: 2px solid black;
-    transition: 0.3s ease;
-}
-
-.closeBtn:hover {
-    background: #ff9eb5;
-    transform: rotate(90deg);
 }
 
 </style>
 </head>
 
 <body>
-
 
 <script>
 for(let i=0;i<40;i++){
@@ -223,31 +237,17 @@ for(let i=0;i<40;i++){
     <a href="index.html">Home</a>
     <a href="laboratory.html">Laboratory</a>
     <a href="exams.html">Exams</a>
+
+    <label class="uploadBtn">
+        Upload
+        <input type="file" accept="image/*" hidden onchange="addImage(event)">
+    </label>
 </div>
 
 <div class="page-title">My Exams</div>
 
 <div class="content">
-
-<div class="gallery">
-
-    <div class="card">
-        <img src="https://via.placeholder.com/300x200" onclick="openImg(this.src)">
-        <div class="caption">Exam 1</div>
-    </div>
-
-    <div class="card">
-        <img src="https://via.placeholder.com/300x200" onclick="openImg(this.src)">
-        <div class="caption">Exam 2</div>
-    </div>
-    
-    <div class="card">
-        <img src="https://via.placeholder.com/300x200" onclick="openImg(this.src)">
-        <div class="caption">Exam 3</div>
-    </div>
-
-</div>
-
+<div class="gallery" id="gallery"></div>
 </div>
 
 <div id="modal" onclick="closeImg()">
@@ -256,15 +256,79 @@ for(let i=0;i<40;i++){
 </div>
 
 <script>
+
+let data = JSON.parse(localStorage.getItem("exams")) || [
+    {
+        src: "https://via.placeholder.com/300x200",
+        caption: "Exam 1"
+    },
+    {
+        src: "https://via.placeholder.com/300x200",
+        caption: "Exam 2"
+    },
+    {
+        src: "https://via.placeholder.com/300x200",
+        caption: "Exam 3"
+    }
+];
+
+function save(){
+    localStorage.setItem("exams", JSON.stringify(data));
+}
+
+function render(){
+    let gallery = document.getElementById("gallery");
+    gallery.innerHTML = "";
+
+    data.forEach((item, index) => {
+        let div = document.createElement("div");
+        div.className = "card";
+
+        div.innerHTML = `
+            <button class="deleteBtn" onclick="del(${index})">×</button>
+            <img src="${item.src}" onclick="openImg(this.src)">
+            <div class="caption">${item.caption}</div>
+        `;
+
+        gallery.appendChild(div);
+    });
+}
+
+function addImage(e){
+    let file = e.target.files[0];
+    if(!file) return;
+
+    let reader = new FileReader();
+    reader.onload = function(ev){
+        data.push({
+            src: ev.target.result,
+            caption: "New Exam"
+        });
+
+        save();
+        render();
+    }
+    reader.readAsDataURL(file);
+}
+
+function del(i){
+    data.splice(i,1);
+    save();
+    render();
+}
+
 function openImg(src){
     document.getElementById("modalImg").src = src;
     document.getElementById("modal").style.display = "flex";
 }
 
-function closeImg(event){
-    if(event) event.stopPropagation();
+function closeImg(e){
+    if(e) e.stopPropagation();
     document.getElementById("modal").style.display = "none";
 }
+
+render();
+
 </script>
 
 </body>
