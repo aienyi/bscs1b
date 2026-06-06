@@ -141,6 +141,8 @@ body::before {
 
 .card img {
     width: 300px;
+    height: 200px;
+    object-fit: cover;
     border-radius: 15px;
     border: 2px solid black;
     cursor: pointer;
@@ -175,6 +177,7 @@ body::before {
     height: 28px;
     cursor: pointer;
     font-weight: bold;
+    z-index: 15;
 }
 
 
@@ -257,9 +260,11 @@ for(let i=0;i<40;i++){
 
 <script>
 
+// Binago ang default array para basahin ang tamang imahe sa unang pwesto.
+// Siguraduhing magkasama sa iisang folder ang iyong HTML file at ang "image.png"
 let data = JSON.parse(localStorage.getItem("exams")) || [
     {
-        src: "https://via.placeholder.com/300x200",
+        src: "image.png", 
         caption: "Exam 1"
     },
     {
@@ -285,7 +290,7 @@ function render(){
         div.className = "card";
 
         div.innerHTML = `
-            <button class="deleteBtn" onclick="del(${index})">×</button>
+            <button class="deleteBtn" onclick="del(event, ${index})">×</button>
             <img src="${item.src}" onclick="openImg(this.src)">
             <div class="caption">${item.caption}</div>
         `;
@@ -311,7 +316,8 @@ function addImage(e){
     reader.readAsDataURL(file);
 }
 
-function del(i){
+function del(e, i){
+    if(e) e.stopPropagation(); // Pinipigilan nitong mag-open ang modal kapag binubura ang card
     data.splice(i,1);
     save();
     render();
